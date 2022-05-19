@@ -1,0 +1,217 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Path : 프로젝트명</title>
+	<style>
+		* {margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline;}
+		body {color:#000; font:normal 13px/1 "맑은 고딕", "Malgun Gothic", Dotum, 돋움, Arial, sans-serif;}
+		a,
+		a:hover {text-decoration:none;}
+
+		#wrap {padding:20px;}
+		.header {position:relative; height:50px;}
+		.header h1 {text-align:center; font-size:24px; font-weight:normal;}
+		.header .nav {position:absolute; top:0; right:0;}
+		.header .nav a {margin-left:5px; padding:5px; float:left; border:1px solid #999; background-color:#ddd; color:#000;}
+		.total {margin-bottom:15px; font-size:15px;}
+		.menu {overflow:hidden; background-color:#222223;}
+		.menu li {list-style-type:none; padding:15px; float:left; font-size:14px; font-weight:bold;}
+		.menu li a {color:#fff;}
+		.article {padding:30px 10px 20px;}
+		.article .title {position:relative; overflow:hidden; padding-bottom:10px; border-bottom:1px solid #999;}
+		.article .title * {margin-right:5px; float:left;}
+		.article .title h2, 
+		.article .title span {font-size:20px;}
+		.article .title .top {float:right; color:#666; font-size:12px; line-height:1.7;}
+		.article .list {width:100%; border-collapse:collapse; border-top:1px solid #eee;}
+		.article .list th {padding:10px; text-align:left; color:#666; font-weight:normal;}
+		.article .list td {padding:10px; color:#666;}
+		.article .list a {color:#666;}
+		.article .list a:hover,
+		.article .list a:active {color:#ff6347; text-decoration:underline;}
+		.article .list tr:hover th,
+		.article .list tr:hover td {background-color:#f5f5f5;}
+		.article .list td.date a {font-family:"맑은 고딕", "Malgun Gothic", Dotum, 돋움;}
+		.article .list td.date a:hover,
+		.article .list td.date a:active {text-decoration:none; cursor:default;}
+		.article .list tr.del th,
+		.article .list tr.del td {color:#ccc; text-decoration:line-through;}
+		.article .list tr.del a,
+		.article .list tr.del a:hover,
+		.article .list tr.del a:active {color:#ccc;}
+	</style>
+	<script src="./static/js/lib/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+	<div id="wrap">
+		<div class="header">
+			<h1>ㅎㅅㅇ</h1>
+		</div>
+
+		<div class="content">
+			<ul class="menu">
+				<li><a href="#">전체</a></li>
+				<li><a href="#">markup 요소</a></li>
+				<li><a href="#">script</a></li>
+			</ul>
+
+			<!-- -->
+			<div class="article"> 
+				<div class="title">
+					<h2>Markup 요소</h2>
+					<a href="#wrap" class="top">TOP</a>
+				</div>
+				<table class="list">
+					<caption></caption>
+					<colgroup>
+						<col width="15%">
+						<col width="15%">
+						<col width="25%">
+						<col width="15%">
+						<col width="15%">
+					</colgroup>
+					<tbody>
+					<tr>
+						<th rowspan="2">meta</th>
+						<th>web</th>
+						<td class="url"><a href="./markup/web/meta.html" target="_blank">Web 사용시 기본 meta</a></td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>mobile</th>
+						<td class="url"><a href="./markup/mobile/meta.html" target="_blank">Mobile 사용시 기본 meta</a></td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>web</th>
+						<th>Center 정렬</th>
+						<td class="url"><a href="./markup/web/center.html" target="_blank">로그인 같은 센터정렬시 사용</a></td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>css</th>
+						<th></th>
+						<td class="url"><a href="/static/css/reset.css" target="_blank">default.css ( = base.css )</a></td>
+						<td class="date"></td>
+						<td><a href="/static/css/master.css" target="_blank">master.css</a></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- //-->
+
+			<!-- -->
+			<div class="article">
+				<div class="title">
+					<h2>Script</h2>
+					<a href="#wrap" class="top">TOP</a>
+				</div>
+				<table class="list">
+					<caption></caption>
+					<colgroup>
+						<col width="15%">
+						<col width="15%">
+						<col width="25%">
+						<col width="15%">
+						<col width="15%">
+					</colgroup>
+					<tbody>
+					<tr>
+						<th>select</th>
+						<th></th>
+						<td class="url">
+							<a href="./script/form/select01.html" target="_blank">select01</a> /
+							<a href="./script/form/select02.html" target="_blank">select02</a> /
+							<a href="./script/form/select03.html" target="_blank">select03</a>
+						</td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>swipe</th>
+						<th>mobile</th>
+						<td class="url">
+							<a href="./script/content/bx01.html" target="_blank">bx01.ver</a> /
+							<a href="./script/content/bx02.html" target="_blank">bx02.ver</a> /
+							<a href="./script/content/bx03.html" target="_blank">bx03.ver</a> /
+							<a href="./script/content/bx04.html" target="_blank">bx04.ver</a>
+						</td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>ScrollMagic</th>
+						<th>plugin</th>
+						<td class="url">
+							<a href="./script/scrollmagic/scroll.html" target="_blank">scroll</a>
+						</td>
+						<td class="date"></td>
+						<td></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- //-->
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('.menu li').each(function() {
+				var index = $('.menu li').index($(this));
+				$(this).find('a').attr('href','#tab' + index);
+			});
+
+			$('.article').each(function() {
+				var index = $('.article').index($(this));
+				index += 1;
+				$(this).attr('id', 'tab' + index);
+			});
+
+			$('.menu a').on('click', function() {
+				var target = $(this).attr('href');
+				var target_first = $('.menu a').eq(0).attr('href');
+
+				$('.article').hide();
+				$(target).show();
+
+				if (target == target_first) {
+					$('.article').show();
+				}
+			});
+
+			$('.date').each(function() {
+				$(this).find('span').hide().filter(':last').show();
+			});
+
+			$('.list .date').each(function() {
+				var max_date = $('span', this).length-1;
+
+				$('span', this).each(function(index) {
+
+					if (index != max_date) {
+						$(this).parent().append('<a href="#">○</a>');
+					} else {
+						$(this).parent().append('<a href="#">●</a>');
+					}
+				});
+			});
+
+			$('.date a').on({
+				"mouseover" : function() {
+					$(this).siblings('span').hide();
+					$(this).siblings('span').eq( $(this).parent().find('a').index($(this)) ).show();
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>
