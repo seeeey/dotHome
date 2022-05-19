@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>select box</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="../../static/css/normalize.css" media="all">
+	<link rel="stylesheet" href="../../static/css/reset.css" media="all">
+
+	<script src="../../static/js/lib/jquery-1.12.0.min.js"></script>
+
+	<style type="text/css">
+		body {padding:30px; line-height:1.4;}
+		
+		.main_search { overflow:visible; margin:10px 0 8px 0; width:970px; height:58px; background-color:#eee; }
+		.main_search > * { display:inline-block; float:left; font-size:16px; height:56px; line-height:56px; text-align:center; }
+		.main_search h3 { width:243px; color:#333; font-weight:bold; }
+		.main_search ol { float:left; }
+		.main_search ol > li { position:relative; float:left; text-align:left; padding-left:20px; margin-right:10px; border:1px solid #000; }
+		.main_search ol li a { display:block; }
+			.main_search li.first a { width:141px; background-position:103px center; }
+			.main_search li.mid a { width:165px; background-position:126px center; }
+				.main_search li.mid ul li { float:left; }
+				.main_search li.mid ul li a { width:81px; }
+			.main_search li.last a { width:271px; background-position:233px center; }
+			.main_search ul { display:none; position:absolute; top:55px; left:0px; z-index:10; border:1px solid #dfdee3; background-color:#f4f6fa; }
+			/*.main_search ul li:first-child { border-top:0px; }*/
+			.main_search li.last ul li { padding-left:18px; }
+			.main_search ul li { padding-left:10px; height:40px; line-height:40px; border-bottom:1px solid #e9eaee; }
+			.main_search ul li a { background:none; font-size:14px; }
+			.main_search ul li a:hover,
+			.main_search ul li a:active,
+			.main_search ul li a:focus { color:#046cce; }
+		.main_search > a { width:88px; }
+		.main_search ol li.on ul { display:block; width:100%; }
+		
+		textarea {margin:20px 0; padding:20px 0; width:100%; height:400px; background-color:#eee;}
+
+	</style>
+</head>
+
+<body style="height:500px;">
+
+	<div class="main_search">
+		<h3>중간·기말고사 출제대비 문제</h3>
+		<ol>
+			<li class="first">
+				<a class="_text" href="#">중학교</a>
+				<ul>
+					<!-- <li><a href="#">초등학교</a></li> // 삭제요청하셨습니다. -->
+					<li class=""><a href="javascript:" onclick="fnMainSearh('002')">중학교</a></li>
+					<li class=""><a href="javascript:" onclick="fnMainSearh('003')">고등학교</a></li>
+				</ul>
+			</li>
+			<li class="mid">
+				<a class="_text" href="#" id="mSearchSubject">과목명</a>
+				<ul>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('001', '국어')">국어</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('002', '영어')">영어</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('003', '수학')">수학</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('004', '사회')">사회</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('005', '역사')">역사</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('006', '도덕')">도덕</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('007', '과학')">과학</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('008', '기술ㆍ가정')">기술ㆍ가정</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('009', '음악')">음악</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('010', '미술')">미술</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('011', '체육')">체육</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('012', '한문')">한문</a></li>
+				    <li><a href="javascript:" onclick="fnMainSearchSubject('013', '생활 일본어')">생활 일본어</a></li>
+				</ul>
+			</li>
+		</ol>
+	</div>
+	<textarea>
+		var search_btn = $('.main_search ol li a')
+			,	search_link = $('.main_search ul li a');
+	
+			search_btn.on('click', function(e){
+				e.preventDefault();
+				
+				if(!$(this).parent('li').hasClass('on')){
+					
+					$(this).parent('li').addClass('on');
+	
+					search_link.click(function(e){	
+						e.preventDefault();
+						$(this).parents(search_btn).removeClass('on');
+						$(this).parents('li').find('._text').text($(this).text());
+					});
+				} else {
+					$(this).parent('li').removeClass('on');
+				}
+	
+			});
+			
+			search_btn.click(function(e){
+				e.preventDefault();
+				e.stopPropagation(); 
+			});
+	
+			$('body').click(function(e){
+				search_btn.parent('li').removeClass('on');
+			});
+	</textarea>
+
+	<script type="text/javascript">
+		$(function(){
+			var search_btn = $('.main_search ol li a')
+			,	search_link = $('.main_search ul li a');
+	
+			search_btn.on('click', function(e){
+				e.preventDefault();
+				
+				if(!$(this).parent('li').hasClass('on')){
+					
+					$(this).parent('li').addClass('on');
+	
+					search_link.click(function(e){	
+						e.preventDefault();
+						$(this).parents(search_btn).removeClass('on');
+						$(this).parents('li').find('._text').text($(this).text());
+					});
+				} else {
+					$(this).parent('li').removeClass('on');
+				}
+	
+			});
+			
+			search_btn.click(function(e){
+				e.preventDefault();
+				e.stopPropagation(); 
+			});
+	
+			$('body').click(function(e){
+				search_btn.parent('li').removeClass('on');
+			});
+		});
+	</script>
+
+	
+
+</body>
+</html>
+
+ 

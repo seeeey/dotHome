@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>CONVERSE</title>
+<link rel="stylesheet" type="text/css" href="css/converse.css">
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script>
+
+	$(function(){
+		var fixClip = $('.fix_cliparea')
+		,	bg = $('.bg')
+		,	sideNavi = $('.side_nav > li')
+		,	header = $('.header_wrap');
+
+		var selectorSlides = sideNavi.find('a').map(function(){
+			return $(this).attr('href');
+		}).get();
+		//각 슬라이드
+		var slides = $(selectorSlides.join()); // 선언 주의!!!
+
+		//console.log(slides.size());
+
+		// scroll move
+		$(window).on('scroll', function(e){
+			console.log($(document).scrollTop());
+			console.log(fixClip);
+
+			var st = $(document).scrollTop()
+			,	fw = fixClip.outerWidth()
+			,	fh = fixClip.outerHeight();
+
+			var top = -st
+			,	right = fw
+			,	bottom = (fh - st);
+
+			fixClip.css({
+				clip : 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px 0)' // 띄어쓰기 주의!!!
+			});
+
+			if(sideNavi.data('isNaviClick')) return; 
+
+			// scroll + menu 
+			slides.each(function(i){
+				var target = $(this)
+				,	slideTop = target.offset().top - header.outerHeight();
+
+				if(st >= slideTop) {
+					var li = sideNavi.eq(i);
+					li.addClass('selected');
+					sideNavi.not(li).removeClass('selected');
+				}
+			});
+
+		});
+
+		// right menu click
+		sideNavi.click(function(e){
+			e.preventDefault();
+			var t = $(e.currentTarget) // li
+			,	navi = t.find('a') // li > a
+			,	moveTarget = $(navi.attr('href'))
+			,	st = moveTarget.offset().top - header.outerHeight(); // offset - 위치를 찾아준다.
+
+			t.addClass('selected').siblings().removeClass('selected');
+
+			sideNavi.data('isNaviClick', true); // 네비 동작 true
+						
+						
+			// 애니메이트 쓴 $('body') 동일하게 써준다.!!! 
+			if($('body').is(':animated')) { // 애니메이트 쓰는 곳은 요거 같이 사용해주면 좋다.
+				return; // 애니메이트 되는 동안 애들은 금지당함....
+			}
+			
+			$('body').animate({
+				scrollTop : st
+			}, 400, 'easeInOutQuart', function(){
+				sideNavi.data('isNaviClick', false); // 애니메이트때 false
+			});
+		});
+
+		/*bg.css({
+			clip: "rect(0, 10px, 0, 0)"
+		});*/
+
+
+		var main = $('.main');
+		main.mousewheel(function(e, dalta, deltaX, deltaY){
+			e.preventDefault();
+			console.log(deltaY); // 휠을 위로 했는지 밑으로 했는지 -로 표기됨...
+			
+			var selLi = sideNavi.filter('.selected');
+			var selIndex = sideNavi.index(selLi.get(0));
+			if(-1 === deltaY){
+				// 더하는 거
+				selIndex += 1 // selIndex++
+			} else if (1 === deltaY){
+				//빼는 거
+				selIndex -= 1
+			}
+
+			if(0 === deltaY) return;
+
+			console.log('선택된 인덱스 - ',selIndex);
+
+			sideNavi.eq(selIndex).trigger('click');
+
+		});
+
+	});
+</script>
+</head>
+
+<body>
+<!-- skip nav -->
+<ul id="skip">
+<li><a href="#gnb">주메뉴 바로가기</a></li>
+<li><a href="#content">본문 바로가기</a></li>
+</ul>
+<!-- //skip nav -->
+<div id="wrap">
+	<!-- header -->
+	<div id="header">
+		<div class="top">
+			<div class="login_wrap" id="login_wrap">
+				<!-- 로그인 -->
+				<div class="join_container" id="join_login" style="display:none">
+					<div class="login">
+						<h2><span class="blind">로그인</span></h2>
+						<fieldset>
+							<legend>login area</legend>
+							<input type="text" class="text id" value="ID" title="id">
+							<input type="text" class="text passwd" value="PASSWORD" title="password">
+							<span class="submit"><input type="submit" class="submit" value="LOG IN"></span>
+							<p>
+								<input type="checkbox" id="login_state">
+								<label for="login_state">로그인상태유지</label>
+								<a href="11_srchid.html">ID 찾기</a>
+								<a href="11_srchpw.html">PASSWORD 찾기</a>
+							</p>
+						</fieldset>
+					</div>
+
+					<div class="join">
+						<h2><span class="blind">회원가입</span></h2>
+						<a href="08_join.html" class="btn_join"><span class="blind">CREATE ACCOUNT</span></a>
+					</div>
+
+					<p class="login_close"><a href="#"><span class="blind">login close</span></a></p>
+				</div>
+				<!-- //login -->
+				
+				<!-- 매장 찾기 -->
+				<div class="join_container store" id="join_store" style="display:none">
+					<form action="07_store_locator.html">
+						<div class="login">
+							<h2><span>매장 찾기</span></h2>
+							<p><span class="sp_store">가까운 컨버스 매장을 찾아보세요.<br>보다 편리하고 빠르게 방문하실 수 있습니다.</span></p>
+						</div>
+						<div class="join">
+							<div class="srch">
+								<h3 class="blind">매장 검색</h3>
+								<div class="inp_bx">
+									<fieldset>
+										<legend>매장 검색양식</legend>
+										<input type="text" class="inp_srch" value="검색어를 입력해주세요.">
+										<button class="bn_srch"><span class="sp_com">검색</span></button>
+									</fieldset>
+								</div>
+							</div>
+							<div class="srch_detail">
+								<h3 class="blind">조건 검색</h3>
+								<ul>
+									<li>
+										<a href="#" class="category">시/도<span class="sp_com"></span></a>
+										<div class="ly_srch">
+											<div class="sc">
+												<ul class="srch_group">
+												<li>
+													<strong>시/도</strong>
+													<ul>
+													<li><a href="#">강원도</a></li>
+													<li><a href="#">경기도</a></li>
+													<li><a href="#">강원도</a></li>
+													<li><a href="#">충청북도</a></li>
+													<li><a href="#">충청남도</a></li>
+													<li><a href="#">대전광역시</a></li>
+													<li><a href="#">경상북도</a></li>
+													<li><a href="#">경상남도</a></li>
+													<li><a href="#">대구광역시</a></li>
+													<li><a href="#">대전광역시</a></li>
+													<li><a href="#">광주광역시</a></li>
+													<li><a href="#">부산광역시</a></li>
+													<li><a href="#">전라북도</a></li>
+													<li><a href="#">전라남도</a></li>
+													<li><a href="#">서울특별시</a></li>
+													</ul>
+												</li>
+												</ul>
+											</div>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="category">취급제품<span class="sp_com"></span></a>
+										<div class="ly_srch">
+											<div class="sc">
+												<ul class="srch_group">
+												<li>
+													<strong>취급제품</strong>
+													<ul>
+													<li><a href="#">강원도</a></li>
+													<li><a href="#">경기도</a></li>
+													<li><a href="#">강원도</a></li>
+													<li><a href="#">충청북도</a></li>
+													<li><a href="#">충청남도</a></li>
+													<li><a href="#">대전광역시</a></li>
+													<li><a href="#">경상북도</a></li>
+													<li><a href="#">경상남도</a></li>
+													<li><a href="#">대구광역시</a></li>
+													<li><a href="#">대전광역시</a></li>
+													<li><a href="#">광주광역시</a></li>
+													<li><a href="#">부산광역시</a></li>
+													<li><a href="#">전라북도</a></li>
+													<li><a href="#">전라남도</a></li>
+													<li><a href="#">서울특별시</a></li>
+													</ul>
+												</li>
+												</ul>
+											</div>
+										</div>
+									</li>
+									<li>
+										<a href="#" class="category">매장유형<span class="sp_com"></span></a>
+										<div class="ly_srch">
+											<div class="sc">
+												<ul class="srch_group">
+												<li>
+													<strong>매장유형</strong>
+													<ul>
+													<li><a href="#">백화점</a></li>
+													<li><a href="#">상설할인매장</a></li>
+													<li><a href="#">일반가두매장</a></li>
+													<li><a href="#">종합가두매장</a></li>
+													<li><a href="#">할인점입점</a></li>
+													</ul>
+												</li>
+												</ul>
+											</div>
+										</div>
+									</li>
+								</ul>
+								<button type="submit" class="bn_srch_dtl"><span class="sp_com">검색</span></button>
+							</div>
+						</div>
+					</form>
+					<a href="#" class="sp_join bn_close"><span class="blind">login close</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="header_wrap">
+			<h1 class="logo"><a href="01_main.html">CONVERSE</a></h1>
+			<!-- gnb -->
+			<button class="bn_all on">전체메뉴</button><!-- .on 클래스 추가 -->
+			<div id="gnb" class="gnb" style="display:none">
+				<ul class="nav">
+				<li class="on"><a href="01_main.html"><span class="nav_main">Main</span></a></li>
+				<li><a href="02_brand_noise.html"><span class="nav_heriage">Brand</span></a></li>
+				<li><a href="03_heroes.html"><span class="nav_heroes">Heroes</span></a></li>
+				<li><a href="04_playing.html"><span class="nav_playing">Now Playing</span></a></li>
+				<li><a href="05_tags.html"><span class="nav_tags">#Tags</span></a></li>
+				<li><a href="06_shop.html"><span class="nav_shop">Shop</span></a></li>
+				</ul>
+			</div>
+			<!-- //gnb -->
+
+			<!-- 가입 등 기타 -->
+			<!-- [D] ul 클래스 s_login 일경우 로그인/회원가입 메뉴가 나타납니다. / ul 클래스 s_logout 일경우 로그아웃, 마이페이지  메뉴가 나타납니다. -->
+			<ul class="etc_r s_login">
+			<li class="log"><a href="#"><span class="bn_login">로그인, 회원가입</span><span class="arr"></span></a></li>
+			<li class="logout" style=""><a href="#"><span class="bn_logout">로그아웃</span></a></li>
+			<li class="logout" style=""><a href="09_info.html"><span class="bn_mypage">마이페이지</span></a></li>
+			<li><a href="#"><span class="bn_find">매장찾기</span><span class="arr"></span></a></li>
+			<li><a href="https://www.facebook.com/converse.kr" target="_blank"><span class="bn_fb">페이스북</span></a></li>
+			</ul>
+			<!-- //가입 등 기타 -->
+		</div>
+	</div>
+	<!-- //header -->
+	<hr>
+
+	<!-- container -->
+	<!-- 기본: padding-top:54px gnb: padding-top:104px -->
+	<div id="container" class="main" style="posiation:relative">
+		<div class="aside">
+			<div class="side_poz">
+				<ul class="side_nav" id="side_nav">
+				<li class="selected"><a href="#m_issue"><span class="s_lssue">lssue</span></a></li>
+				<li><a href="#m_heritage"><span class="s_brand">Brand</span></a></li>
+				<li><a href="#m_hero"><span class="s_heroes">heroes</span></a></li>
+				<li><a href="#m_playing"><span class="s_playing">Now Playing</span></a></li>
+				<li><a href="#m_tag"><span class="s_tags">#Tags</span></a></li>
+				<li><a href="#m_shop"><span class="s_shop">shop</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="scroll_area" id="scroll_area">
+		
+			<div class="m_issue" id="m_issue" style="overflow: hidden; height: 845px;">
+				<h2 class="blind">캔버스 이슈</h2>
+				<div class="fix_cliparea">
+					<div class="set_wrap">
+						<div class="set pic" style="display: block;">
+							<div class="bg"><img src="img/main_issue01.jpg" alt="" data-href="02_brand_noise.html"></div>
+							<div class="set_inner"><span>NOISE TO THE WORLD</span></div>
+						</div>
+						<div class="set pic v2" style="display: none;">
+							<div class="bg"><img src="img/main_issue02.jpg" alt="" data-href="03_heroes.html"></div>
+							<div class="set_inner"><span>THE CONVERSE CHUCK TAYLOR ALL STAR COMBAT BOOT. 텅에 지퍼를 부착하고 뒤꿈치와 발끝 부분에 고무를 덧대어 보호 기능을 높인 밀리터리 스타일의 컨버스 척테일러 올스타 컴뱃부츠로 겨울철 스타일링을 완성하세요.</span></div>
+						</div>
+						<div class="set pic v3" style="display: none;">
+							<div class="bg"><img src="img/main_issue03.jpg" alt="" data-href="04_playing.html"></div>
+							<div class="set_inner"><span>ENJOY NEW FACEBOOK KOREA.컨버스 코리아 페이스북의 친구가 되어주세요.</span></div>
+						</div>
+					</div>
+					<ul class="tab">
+					<li class="on"><a href="02_brand_rubber.html" class="tab_brand tp_btn"><span>NOISE TO THE WORLD</span></a></li>
+					<li><a href="03_heroes.html" class="tab_heroes tp_btn"><span>겨울신상품</span></a></li>
+					<li><a href="04_playing.html" class="tab_tag tp_btn"><span>페이스북</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="m_heritage" id="m_heritage" style="overflow: hidden; height: 792px;">
+				<div class="inner">
+					<!-- 타이틀 모션 : 따로 -->
+					<h2 id="m_motion"><span>CONVERSE BRAND</span></h2>
+					<p class="desc" id="m_motion2">컨버스 코리아의 최근 브랜드 소식을 전합니다.</p>
+					<!-- //타이틀 모션 : 따로 -->
+					<div class="bnr_dna" id="bnr_heritage">
+						<div class="pic_wrap">
+							<ul>
+							<li class="on">
+								<a href="#" class="point tp_btn">1</a>
+								<p class="pic" style="display: block;"><a href="02_brand_noise.html#present"><img src="img/main_brand01.jpg" alt="Converse introduces new boot silhouettes and winterized textures in time for the Holiday Season"></a></p>
+							</li>
+							<li>
+								<a href="#" class="point tp_btn">2</a>
+								<p class="pic" style="display: none;"><a href="02_brand_noise.html#mid"><img src="img/main_brand02.jpg" alt="The Converse Chuck Taylor All Star Winter Boots Collection with rugged silhouettes and warm materials"></a></p>
+							</li>
+							<li>
+								<a href="#" class="point tp_btn">3</a>
+								<p class="pic" style="display: none;"><a href="02_brand_noise.html#third"><img src="img/main_brand03.jpg" alt="THE CONVERSE STYLEBOOK "></a></p>
+							</li>
+							</ul>
+						</div>
+						<button class="bn_prev">이전</button>
+						<button class="bn_next">다음</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="m_hero" id="m_hero" style="overflow: hidden; height: 845px;">
+				<span class="caver_bx"><img src="img/main_hero.jpg" alt=""></span>
+				<div class="inner">
+					<!-- 타이틀 모션 : 같이 -->
+					<div class="tit_wrap" id="m_motion3">
+						<h2><span>HEROES</span></h2>
+						<p class="desc">컨버스는 크리에이티브한 정신을 자극하고 이끌어내는 것을 목표로 2014 가을,겨울 시즌 세 가지 주요 라인을 선보입니다.</p>
+					</div>
+					<!-- //타이틀 모션 : 같이 -->
+					<ul class="lst_hero" id="m_motion4">
+					<li><a href="03_heroes.html"><span class="hero_allstar">Converse All Star</span></a></li>
+					<li><a href="03_heroes_cons.html"><span class="hero_cons">Converse Cons</span></a></li>
+					<li><a href="03_heroes_jackpurcell.html"><span class="hero_jp">Converse Jack Purcell</span></a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="m_playing" id="m_playing" style="overflow: hidden; height: 845px;">
+				<div class="inner">
+					<h2 id="m_motion5" style="position: relative;"><span>NOW PLAYING</span></h2>
+					<p class="desc" id="m_motion6" style="position: relative;">공식 홈페이지와 페이스북을 통해 최신 제품 정보와 이벤트를 만나세요. 언제 어디서나 컨버스 코리아와 함께할 수 있습니다.</p>
+					<!-- facebook list-->
+					<ul class="lst_fb">
+					<li>
+						<div class="thmb">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb.jpg" width="269" height="269" alt="">
+								<p class="txt">Maison Martin Margiela와 Converse 의 두번째 콜라보레이션 발매 (사진: 6장) 컨버스의 팬분들은 많이 기다리셨을텐데요, 작년, 센세이션을 일으킬만한 페인팅 기법과 전혀 예상치 못한 두 브랜드의...</p>
+							</a>
+						</div>
+						<div class="fb_info">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb2.gif" alt=""><span class="cover"></span>
+								<p><strong>Converse Korea</strong>5월 23일</p>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="thmb">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb02.jpg" width="269" height="269" alt="">
+								<p class="txt">컨버스의 팬분들은 많이 기다리셨을텐데요, 작년, 센세이션을 일으킬만한 페인팅 기법과 전혀 예상치 못한 두 브랜드의 만남으로 큰 화제가 되었던 Maison Martin Margiela(이하 MMM)와 Converse 의 두번째 콜라보레이션 팩이 드디어 발매됩니다.</p>
+							</a>
+						</div>
+						<div class="fb_info">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb2.gif" alt=""><span class="cover"></span>
+								<p><strong>Converse Korea</strong>5월 23일</p>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="thmb">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb03.jpg" width="269" height="269" alt="">
+								<p class="txt">Chuck Taylor 1970s "Vintage Flag 요즘 1970년대 척테일러를 재현한 제품 "Chuck70s"에 대한 관심이 부쩍 높아지고 있죠! Chuck70s를 좋아하시는 분들에겐 희소식! 미국의 Memorial day를 기념하...</p>
+							</a>
+						</div>
+						<div class="fb_info">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb2.gif" alt=""><span class="cover"></span>
+								<p><strong>Converse Korea</strong>5월 23일</p>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="thmb">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb04.jpg" width="269" height="269" alt="">
+								<p class="txt">Jack Purcell Jeffrey CVO, slip-on 출시 요즘 인기최고인 젝퍼셀의 슬립온 버젼 "Jeffrey"가 오늘 런칭됩니다. 슬립온 스타일의 젝퍼셀은 다소 생소하실 텐데요, 최근 패션위크에서 패션피플의...</p>
+							</a>
+						</div>
+						<div class="fb_info">
+							<a href="https://www.facebook.com/converse.kr" target="_blank">
+								<img src="img/@thumb/@thumb_fb2.gif" alt=""><span class="cover"></span>
+								<p><strong>Converse Korea</strong>5월 23일</p>
+							</a>
+						</div>
+					</li>
+					</ul>
+					<!-- //facebook list-->
+					<a href="04_playing.html" class="bn_more">More View</a>
+				</div>
+			</div>
+			
+			<!-- 모션 삭제 : 통으로 스크롤 -->
+			<div class="m_tag" id="m_tag">
+				<h2 class="blind">#Tags</h2>
+				<ul class="lst_instargram">
+				<li class="hgroup">
+					<img src="img/space.gif" alt="">
+					<div class="in">
+						<p class="tit"><strong>#Tag</strong></p>
+						<p class="desc">지금, 인스타그램을 통해 나만의 컨버스를 만나보세요.</p>
+						<a href="05_tags.html" class="bn_more">More View</a>
+					</div>
+				</li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig2.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig3.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig4.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig5.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig6.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig7.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig8.jpg" alt=""><span></span></a></li>
+				<li><a href="05_tags.html?ly_pop"><img src="img/@thumb/@thumb_ig9.jpg" alt=""><span></span></a></li>
+				</ul>
+			</div>
+			
+			<div class="m_shop" id="m_shop" style="overflow: hidden; height: 845px;">
+				<div class="inner">
+					<!-- 타이틀 모션 : 같이 -->
+					<div class="tit_wrap">
+						<h2 id="m_motion7" style="position: relative;"><span>SHOP</span></h2>
+						<p class="desc" id="m_motion8" style="position: relative;">세상의 모든 컨버스를 지금 SHOP에서 경험하세요.</p>
+					</div>
+					<!-- //타이틀 모션 : 같이 -->
+					<p class="go_shop" id="m_motion9" style="position: relative;"><a href="06_shop.html" class="bn_goshop">MORE VIEW</a></p>
+					<div class="img_shop"></div>
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+	<!-- //container -->
+	<hr>
+
+	<!-- footer -->
+	<div id="footer">
+		<!-- [D] 리스트 5개 일때 ul에 v2 클래스 추가 <ul class="lst_footer v2">-->
+		<ul class="lst_footer">
+		<li><a href="#" class="nav_locator">매장찾기</a></li>
+		<li><a href="#" class="nav_help">HELP</a></li>
+		<li><a href="#" class="nav_sitemap">사이트맵</a></li>
+		<!-- <li><a href="#" class="nav_terms">이용약관</a></li>
+		<li><a href="#" class="nav_privacy">개인정보취급방침</a></li> -->
+		</ul>
+		<ul class="lst_company">
+			<li><span class="cp_corp">업체명 (유)컨버스코리아)</span></li>
+			<li><span class="cp_num">사업자등록번호 220-88-074818</span></li>
+			<li><span class="cp_name">대표자 이경우</span></li>
+			<li><span class="copyright">(C) 2014 Converse korea</span></li>
+		</ul>
+	</div>
+	<!-- //footer -->
+</div>
+</body>
+</html>

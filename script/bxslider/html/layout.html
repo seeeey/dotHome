@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://bxslider.com/examples/image-slideshow-captions/ -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>jQuery Content Slider | Responsive jQuery Slider | bxSlider</title>
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="keywords" content="content slider, responsive image gallery, responsive image gallery, image slider, image fade, image rotator">
+		<meta name="description" content="Respsonsive jQuery content slider.">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" charset="UTF-8" src="./js/jquery-1.11.1.min.js"></script>
+		<script src="./js/jquery.bxslider.min.js"></script>
+		<script src="./js/plugins/jquery.easing.1.3.js"></script>
+		<link rel="stylesheet" href="./css/styles.css">
+		<link rel="stylesheet" href="./js/jquery.bxslider.css">
+		<script>
+		  	$(function(){
+		  		$('.bxslider1').bxSlider({ 
+		  			mode:'fade', 
+		  			captions:true,
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider2').bxSlider({ 
+					auto: true, 
+					autoControls: true,
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider3').bxSlider({ 
+					infiniteLoop: false, 
+					hideControlOnEnd: true,
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider4').bxSlider({ 
+					adaptiveHeight: true, 
+					mode: 'fade',
+					slideWidth : 600
+				});
+				
+				$('.bxslider5').bxSlider({ 
+					slideWidth: 250, 
+					minSlides: 2, 
+					maxSlides: 3, 
+					moveSlides: 1, 
+					slideMargin: 10
+				});
+				
+				$('.bxslider6').bxSlider({ 
+					minSlides: 2, 
+					maxSlides: 2, 
+					slideWidth: 250, 
+					slideMargin: 10
+				});
+				
+				$('.bxslider7').bxSlider({ 
+					minSlides: 3, 
+					maxSlides: 4, 
+					slideWidth: 170, 
+					slideMargin: 10
+				});
+				
+				$('.bxslider8').bxSlider({ 
+					pagerCustom: '#bx-pager',
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider9').bxSlider({ 
+					buildPager: function(slideIndex){ 
+						switch(slideIndex){ 
+							case 0: return '<img src="./images/coffee1_mini.jpg">'; 
+							case 1: return '<img src="./images/coffee2_mini.jpg">'; 
+							case 2: return '<img src="./images/coffee3_mini.jpg">'; 
+						} 
+					}
+				});
+				
+				$('.bxslider10').bxSlider({ 
+					mode: 'vertical', 
+					slideMargin: 5,
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider11').bxSlider({ 
+					nextSelector: '#slider-next11', 
+					prevSelector: '#slider-prev11', 
+					nextText: 'Onward →', 
+					prevText: '← Go back',
+		  			slideWidth : 600 
+				});
+				
+				$('.bxslider13').bxSlider({ 
+					onSliderLoad: function(){ 
+						// do funky JS stuff here 
+						//alert('슬라이더 로딩을 완료했습니다. 계속 하려면 확인 클릭!'); 
+					}, 
+					onSlideAfter: function(){ 
+						// do mind-blowing JS stuff here 
+						//alert('슬라이드 전환이 완료되었습니다. 계속 하려면 확인 클릭!'); 
+					},
+		  			slideWidth : 600 
+				});
+				
+				var slider = $('.bxslider14').bxSlider({ 
+					mode: 'fade',
+		  			slideWidth : 600  
+				}); 
+				$('#slider-next14').click(function(){ 
+					slider.goToNextSlide(); 
+					return false; 
+				}); 
+				$('#slider-count14').click(function(){ 
+					var count = slider.getSlideCount(); 
+					alert('Slide count: ' + count); return false; 
+				});
+				
+				$('.bxslider16').bxSlider({ 
+					minSlides: 4, 
+					maxSlides: 4, 
+					slideWidth: 170, 
+					slideMargin: 10, 
+					ticker: true, 
+					speed: 6000
+				});
+				
+				$('.bxslider17').bxSlider({ 
+					mode: 'horizontal', 
+					useCSS: false, 
+					infiniteLoop: false, 
+					hideControlOnEnd: true, 
+					easing: 'easeOutElastic', 
+					speed: 2000,
+					slideWidth : 600
+				});
+				
+				var slider = $('.bxslider18').bxSlider({ 
+					mode: 'horizontal',
+					slideWidth : 600
+				}); 
+				$('#reload-slider18').click(function(e){ 
+					e.preventDefault(); 
+					$('.bxslider18').append('<li><img src="./images/coffee3.jpg"></li>'); 
+					slider.reloadSlider(); 
+				});
+				
+				var slider = $('.bxslider19').bxSlider({ 
+					mode: 'horizontal' ,
+					slideWidth : 600
+				}); 
+				$('#reload-slider19').click(function(e){ 
+					e.preventDefault(); 
+					slider.reloadSlider({ 
+						mode: 'fade', 
+						auto: true, 
+						pause: 1000, 
+						speed: 500,
+						slideWidth : 600 
+					}); 
+				});
+				
+			});
+		</script>
+	 </head>
+	<body>
+		<div class="content">
+			<h1>1. Image gallery with captions</h1>
+			<ul class="bxslider1">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>2. Auto show with start / stop controls</h1>
+			<ul class="bxslider2">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>3. Manual show without infinite loop</h1>
+			<ul class="bxslider3">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>4. Slideshow using adaptiveHeight</h1>
+			<ul class="bxslider4">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee4.jpg" title="이미지4"/></li> 
+			</ul>
+			
+			<h1>5. Carousels demystified - in depth explanation with examples</h1>
+			<ul class="bxslider5">
+				<li><img src="./images/1.gif" alt="1" /></li>
+				<li><img src="./images/2.gif" alt="2" /></li>
+				<li><img src="./images/3.gif" alt="3" /></li>
+				<li><img src="./images/4.gif" alt="4" /></li>
+				<li><img src="./images/5.gif" alt="5" /></li>
+				<li><img src="./images/6.gif" alt="6" /></li>
+				<li><img src="./images/7.gif" alt="7" /></li>
+				<li><img src="./images/8.gif" alt="8" /></li>
+				<li><img src="./images/9.gif" alt="9" /></li>
+				<li><img src="./images/10.gif" alt="10" /></li>
+			</ul>
+			
+			<h1>6. Carousel - static number of slides showing</h1>
+			<ul class="bxslider6">
+				<li><img src="./images/1.gif" alt="1" /></li>
+				<li><img src="./images/2.gif" alt="2" /></li>
+				<li><img src="./images/3.gif" alt="3" /></li>
+				<li><img src="./images/4.gif" alt="4" /></li>
+				<li><img src="./images/5.gif" alt="5" /></li>
+				<li><img src="./images/6.gif" alt="6" /></li>
+				<li><img src="./images/7.gif" alt="7" /></li>
+				<li><img src="./images/8.gif" alt="8" /></li>
+				<li><img src="./images/9.gif" alt="9" /></li>
+				<li><img src="./images/10.gif" alt="10" /></li>
+			</ul>
+			
+			<h1>7. Carousel - dynamic number of slides showing</h1>
+			<ul class="bxslider7">
+				<li><img src="./images/1.gif" alt="1" /></li>
+				<li><img src="./images/2.gif" alt="2" /></li>
+				<li><img src="./images/3.gif" alt="3" /></li>
+				<li><img src="./images/4.gif" alt="4" /></li>
+				<li><img src="./images/5.gif" alt="5" /></li>
+				<li><img src="./images/6.gif" alt="6" /></li>
+				<li><img src="./images/7.gif" alt="7" /></li>
+				<li><img src="./images/8.gif" alt="8" /></li>
+				<li><img src="./images/9.gif" alt="9" /></li>
+				<li><img src="./images/10.gif" alt="10" /></li>
+			</ul>
+			
+			<h1>8. Thumbnail pager - method 1</h1>
+			<ul class="bxslider8"> 
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li>
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li>
+			</ul> 
+			<div id="bx-pager"> 
+				<a data-slide-index="0" href=""><img src="./images/coffee1_mini.jpg" title="이미지1"/></a> 
+				<a data-slide-index="1" href=""><img src="./images/coffee2_mini.jpg" title="이미지2"/></a> 
+				<a data-slide-index="2" href=""><img src="./images/coffee3_mini.jpg" title="이미지3"/></a> 
+			</div>
+			
+			<h1>9. Thumbnail pager - method 2</h1>
+			<ul class="bxslider8"> 
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li>
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li>
+			</ul> 
+			
+			<h1>10. Vertical slideshow</h1>
+			<ul class="bxslider10">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>11. Custom next / prev control selectors</h1>
+			<ul class="bxslider11">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			<div class="outside"> 
+				<p><span id="slider-prev11"></span> | <span id="slider-next11"></span></p> 
+			</div>
+			
+			<h1>13. Callback API</h1>
+			<ul class="bxslider13">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>14. Public methods</h1>
+			<ul class="bxslider14">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			<p>
+				<a href="#" id="slider-next14">Click me to go to the next slide</a><br /> 
+				<a href="#" id="slider-count14">Click me to see the total slide count</a>
+			</p>
+			
+			<h1>16. Ticker mode</h1>
+			<ul class="bxslider16">
+				<li><img src="./images/1.gif" alt="1" /></li>
+				<li><img src="./images/2.gif" alt="2" /></li>
+				<li><img src="./images/3.gif" alt="3" /></li>
+				<li><img src="./images/4.gif" alt="4" /></li>
+				<li><img src="./images/5.gif" alt="5" /></li>
+				<li><img src="./images/6.gif" alt="6" /></li>
+				<li><img src="./images/7.gif" alt="7" /></li>
+				<li><img src="./images/8.gif" alt="8" /></li>
+				<li><img src="./images/9.gif" alt="9" /></li>
+				<li><img src="./images/10.gif" alt="10" /></li>
+			</ul>
+			
+			<h1>17. Custom easing</h1>
+			<ul class="bxslider17">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			
+			<h1>18. Reload slider</h1>
+			<ul class="bxslider18">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+			</ul>
+			<p><a href="" id="reload-slider18">Click to add a slide, then reload the slider</a></p>
+			
+			<h1>19. Reload slider with new settings</h1>
+			<ul class="bxslider19">
+				<li><img src="./images/coffee1.jpg" title="이미지1"/></li> 
+				<li><img src="./images/coffee2.jpg" title="이미지2"/></li> 
+				<li><img src="./images/coffee3.jpg" title="이미지3"/></li> 
+			</ul>
+			<p><a href="" id="reload-slider19">Click to reload slider with new settings</a></p>
+			
+		</div>
+	</body>
+</html>

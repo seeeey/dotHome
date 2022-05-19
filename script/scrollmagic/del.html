@@ -1,0 +1,156 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>scrolling</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.0/TweenMax.min.js"></script> <!-- scollmagic은 greensock 애니메이션 플랫폼 애니메이션 선택사항이지만 의존도 높으므로 넣어두는것이 좋다 -->  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/ScrollMagic.js"></script><!-- scollmagic 라이브러리 -->
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/plugins/animation.gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.2/plugins/debug.addIndicators.min.js"></script>
+    
+    <script src="jquery.scrollmagic.debug.js"></script><!-- Dev only -->
+   
+	<style>
+		* {
+		    margin: 0;
+		    padding: 0;
+		    font-family: monospace;
+		}
+		
+		body {
+		
+		    background-color: #f8f8f8;
+		}
+		
+		.top {
+		    padding: 120px 50px;
+		    border-bottom: 1px solid #e0e0e0;
+		    background-color: #fff;
+		    
+		    h1 {
+		        font-size: 70px;
+		    }
+		    
+		    p {
+		        margin-top: 8px;
+		        font-size: 15px;
+		        line-height: 140%;
+		    }
+		}
+		
+		.main {
+		    margin-top: 120px;
+		    padding: 0 50px;
+		    
+		    h2 {
+		        font-size: 30px;
+		        margin-bottom: 20px;
+		        letter-spacing: 2px;
+		    }
+		    
+		    .textWrap {
+		        padding-bottom: 30px;
+		        border-bottom: 1px solid #aaa;
+		    }
+		    
+		    .spacer {
+		        height: 150px;
+		    }
+		    
+		    .text {
+		        font-size: 14px;
+		        margin-bottom: 10px;
+		        line-height: 140%;
+		    }
+		    
+		    .icon {
+		        width: 140px;
+		        height: 140px;
+		        color: #fff;
+		        font-size: 40px;
+		        line-height: 140px;
+		        text-align: center;
+		        background-color: #999;
+		        border-radius: 100%;
+		        
+		    }
+		}
+		
+		.trigger {
+		    width: 100%;
+		    height: auto;
+		    font-weight: bold;
+		    font-size: 20px;
+		    background-color: #bada77;
+		}
+		
+		.footer {
+		    margin-top: 240px;
+		    padding: 0 50px;
+		    height: 40px;
+		    background-color: #222;
+		    
+		    a {
+		        display: block;
+		        line-height: 40px;
+		        font-family: monospace;
+		        letter-spacing: 1px;
+		        text-align: right;
+		        color: #fff;
+		    }
+		}
+	</style>
+	<script>
+		(function(){
+    
+    var controller = new ScrollMagic.Controller();
+    
+    var tween1 = TweenMax.to('#animate1', 0.5, {
+        backgroundColor: "#333333",
+        scale: 2.5,
+        rotation: 360,
+        x: 130
+    });
+    
+    var scene = new ScrollMagic.Scene({
+        triggerElement: "#trigger1",
+        duration: "100%"
+    })
+    .setTween(tween1)
+    .addTo(controller)
+    .addIndicators({
+        name: "1"
+    }) 
+    
+}())
+	</script>
+</head>
+<body>
+	<div class="wrap">
+    <div class="top">
+        <h1>ScrollMagic Demo</h1>
+        <p>스크롤매직 라이브러리 데모입니다.<br/><a href="http://scrollmagic.io/examples/" target="_blank">여기</a>에서 더 많은 예시를 확인할 수 있습니다.</p>
+    </div>
+    <div class="main">
+        <h2>What a wonderful!</h2>
+        <div class="textWrap">
+            <p class="text">Dolore occaecat cupidatat nostrud voluptate officia anim culpa minim in eiusmod eiusmod in. Esse magna excepteur est eiusmod excepteur laborum amet esse sint sit velit cupidatat excepteur. Aliquip magna dolore quis in tempor ipsum. Ad nostrud cupidatat ut do exercitation nulla ipsum culpa. Dolor laboris sunt voluptate nostrud. Cupidatat non sint est proident pariatur nulla. Aliqua reprehenderit ad do in ut deserunt sit.</p>
+<p class="text">Amet aliquip incididunt exercitation et consequat sint laborum nulla. Excepteur qui ut cillum eu quis irure elit proident deserunt eiusmod consectetur. Amet occaecat et ex in dolore velit esse occaecat fugiat id et.</p>
+        </div>
+        <div class="spacer"></div>
+        <div class="trigger" id="trigger1">Trigger!</div>
+        <div class="spacer"></div>
+        <div id="animate1" class="icon">Hello</div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+    </div>
+    <div class="footer"><a href="https://nykim.work">nykim.work</a></div>
+</div>
+</body>
+</html>

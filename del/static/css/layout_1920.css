@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+/*body { background-color:tomato; }*/
+body {font:normal 16px/1.0 NanumGothic, 나눔고딕, Dotum, 돋움, Arial; }
+.inner { max-width:1920px; }
+
+header { text-align:center; }
+header nav { padding-top:38px; padding-left:0px; }
+
+.visual .left_txt,
+.visual .right_visu { height:1048px; }
+.visual .left_txt { width:50%; }
+	.left_txt .inner_txt { margin:280px 258px 0 0; }
+	.left_txt h1 { font-size:88px; } 
+.visual .right_visu { width:50%; }

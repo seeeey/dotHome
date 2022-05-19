@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>select box</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="../../static/css/normalize.css" media="all">
+	<link rel="stylesheet" href="../../static/css/reset.css" media="all">
+
+	<script src="../../static/js/lib/jquery-1.12.0.min.js"></script>
+
+	<style type="text/css">
+		body {padding:30px; line-height:1.4;}
+		.selectbox {display:none;}			
+		.selector-peindre {position:relative;}
+		.selector-peindre .selected-area {display:block; position:relative; width:inherit; height:27px; border:1px solid #d0d0d0; background-color:#fff; color:#666; text-align:left; text-indent:10px; outline:none; line-height:26px;}   
+		.selector-peindre .selected-area span { position:absolute; position:absolute; top:10px; right:10px; display:inline-block; width:0px; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:8px solid #D0D0D0; }
+		.selector-peindre .selector-list {display:none; position:absolute; left:0; z-index:50; width:inherit; border:1px solid #d0d0d0; border-top:0 none; background-color:#fff;}
+		.selector-peindre .selector-list a {display:block; padding:9px 10px 10px; color:#666;}
+		.selector-peindre .selector-list a:hover,
+		.selector-peindre .selector-list a.active {background-color:#f0f0f0;}
+		.divide100 {width:100px;}
+		
+		textarea {margin:20px 0; width:100%; height:500px; background-color:#eee;}
+		.explain {margin:30px 0; padding:10px; border:solid #000; border-width:2px 0;}
+	</style>
+</head>
+
+<body>
+
+	<select class="selectbox divide100">
+		<option selected="selected">선택</option>
+		<option value="A">조건 A</option>
+		<option value="B">조건 B</option>
+		<option value="C">조건 C</option>
+		<option value="D">조건 D</option>
+		<option value="E">조건 E</option>
+	</select>
+	
+	<br>
+	<br>
+
+	<select style="width:300px;" class="selectbox">
+		<option selected="selected">선택</option>
+		<option value="A">조건 A</option>
+		<option value="B">조건 B</option>
+		<option value="C">조건 C</option>
+		<option value="D">조건 D</option>
+		<option value="E">조건 E</option>
+	</select>
+
+	<script type="text/javascript">
+		function selectInit() {
+			$('.selectbox').after('\
+				<div class="selector-peindre">\
+				<a href="#none" class="selected-area">선택<span></span></a>\
+				<ul class="selector-list">\
+				</ul>\
+			</div>');
+
+			$('.selectbox').each(function() {
+				$('option', this).each(function(index) {
+					if(index == 0){ 
+						$(this).parent().next().find('.selected-area').html($(this).text() + '<span></span>');
+					}
+					$(this).parent().next().find('.selector-list').append('<li><a href="#none">' + $(this).text() + '</a></li>');
+				});
+
+				if  (typeof($(this).attr('style')) != 'undefined') {
+					$(this).next().attr({'style' : 'width:' + $(this).outerWidth() + 'px' });
+					$(this).next().find('.selector-list').attr({'style' : 'width:' + $(this).outerWidth() + 'px' }); 
+				} else {
+					$(this).next().attr({'class' : $(this).attr('class').replace('selectbox', 'selector-peindre')});
+					$(this).next().find('.selector-list').attr({'class' : $(this).attr('class').replace('selectbox', 'selector-list')})
+				}
+			});
+
+			$('.selector-peindre .selected-area').on('click',function(ev) { 
+				ev.preventDefault();
+				ev.stopPropagation();
+
+				if ($(this).next().css('display') == 'none') {
+					$(this).next().show();
+				} else {
+					$(this).next().hide();
+				}
+			});
+
+			$('.selector-peindre .selector-list a').on('click',function(ev) {
+				ev.preventDefault();
+				ev.stopPropagation();
+
+				var num = $(this).parents('.selector-list').find("a").index($(this));
+
+				$('.selector-list a').removeClass('active');
+				$(this).addClass('active');
+				$(this).parents('.selector-peindre').prev().find('option').eq(num).prop('selected', 'selected');
+				$(this).parents('.selector-list').prev().html( $(this).text() + '<span></span>');
+				$(this).parents('.selector-list').hide();
+			});
+
+			$(document).on('click', function(){
+				$('.selector-peindre .selector-list').hide();
+			});
+		} selectInit();
+	</script>
+
+	<div class="explain">
+		selectbox 라는 class를 가진 select 는 display:none로 숨김 처리가 되고 selector-peindre라는 class를 가진 div 가 생성됩니다.<br>
+		화살표 이미지 넣을부분은 css에서 .selector-peindre .selected-area span 속성중에  background:#000; 을 바꾸시면 됩니다.<br>
+		width 값을 class 로 추가 할 경우 class="selectbox divide100" 이렇게 추가 하면 됩니다.  <br>
+		width 값을 style 로 추가 할 경우 style="width:300px;" 이렇게 추가 하면 됩니다.<br>
+		style 이 없는경우 style 이 적용되지 않고 class 가 되고, class 가 없는 경우 style이 적용됩니다. if  (typeof($(this).attr('style')) != 'undefined') { ....  } else {  ....  } 이 부분으로 style과 class를 나누어놨습니다. <br>
+		첫번째 select 는 width값을 class로 추가한 경우 이고 두번째 select 는 style로 추가한 경우 입니다.<br>
+		IE7 브라우저 에선 selector-list 라는 레이어가 2픽셀 크게 나옵니다. border 때문에... IE7은 width:inherit; 가 적용되지 않습니다. 아주 뭐가 그리 잘났는지.. 상속이라는 속성을 받아 들이지 못하나 봅니다..망할..<br>
+		IE7 브라우저도 적용되어야 한다면 css에서 width:inherit; 를 삭제 하고 스크립트에서   $(this).next().find('.selector-list').attr({'style' : 'width:' + $(this).outerWidth() + 'px' });   이 부분의 outerWidth() 값을 width()로 변경 하면 됩니다. 그러면 IE7 브라우저 포함되어서 원하는 width값이 적용될 것 입니다.<br>
+		'그럼 width값을 class로 준 경우는 어떻게 해요??' 일언질문 안받습니다.ㅋㅋ 나도 뭐..;; 음.;; 그럼 IE7 브라우저 분기 처리 해야 합니다... css width값에서 -2 일케 해줘야 합니다...
+		IE7브라우저도 포함 되어야 한다고 한다면.... 웬만하면 width값은 style로 적용합시다.. <br>
+	</div>
+
+	<textarea>
+function selectInit() {
+	$('.selectbox').after('\
+		<div class="selector-peindre">\
+		<a href="#none" class="selected-area">선택<span></span></a>\
+		<ul class="selector-list">\
+		</ul>\
+	</div>');
+
+	$('.selectbox').each(function() {
+		$('option', this).each(function(index) {
+			if(index == 0){ 
+				$(this).parent().next().find('.selected-area').html($(this).text() + '<span></span>');
+			}
+			$(this).parent().next().find('.selector-list').append('<li><a href="#none">' + $(this).text() + '</a></li>');
+		});
+
+		if  (typeof($(this).attr('style')) != 'undefined') {
+			$(this).next().attr({'style' : 'width:' + $(this).outerWidth() + 'px' });
+			$(this).next().find('.selector-list').attr({'style' : 'width:' + $(this).outerWidth() + 'px' }); 
+		} else {
+			$(this).next().attr({'class' : $(this).attr('class').replace('selectbox', 'selector-peindre')});
+			$(this).next().find('.selector-list').attr({'class' : $(this).attr('class').replace('selectbox', 'selector-list')})
+		}
+	});
+
+	$('.selector-peindre .selected-area').on('click',function(ev) { 
+		ev.preventDefault();
+		ev.stopPropagation();
+
+		if ($(this).next().css('display') == 'none') {
+			$(this).next().show();
+		} else {
+			$(this).next().hide();
+		}
+	});
+
+	$('.selector-peindre .selector-list a').on('click',function(ev) {
+		ev.preventDefault();
+		ev.stopPropagation();
+
+		var num = $(this).parents('.selector-list').find("a").index($(this));
+
+		$('.selector-list a').removeClass('active');
+		$(this).addClass('active');
+		$(this).parents('.selector-peindre').prev().find('option').eq(num).prop('selected', 'selected');
+		$(this).parents('.selector-list').prev().html( $(this).text() + '<span></span>');
+		$(this).parents('.selector-list').hide();
+	});
+
+	$(document).on('click', function(){
+		$('.selector-peindre .selector-list').hide();
+	});
+} selectInit();	
+	</textarea>
+
+</body>
+</html>
+
+ 

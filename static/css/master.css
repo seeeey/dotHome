@@ -1,0 +1,46 @@
+@charset "utf-8";
+@import url('fontcss.css');
+@import url('normalize.css');
+@import url('layout.css');
+@import url('content.css');
+
+/* ************************************
+ 	reset 
+************************************ */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+main, article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent; 
+}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption { 
+    display: block 
+}
+body {font:normal 20px/1.0 NanumBarunGothic, 나눔바른고딕, Dotum, 돋움, Arial; color:#777;}
+ul, ol {list-style-type:none;}
+strong {font-weight:600;}
+a { font-family:NanumBarunGothic, 나눔바른고딕, Dotum, 돋움, Arial; color:#808696; text-decoration:none; }
+button {padding:0; margin:0; font-family:NanumBarunGothic, 나눔바른고딕, Dotum, 돋움, Arial; border:0 none; background-color:transparent;}
+
+/* form */
+legend {width:0; height:0; font-size:0; line-height:0; visibility:hidden; overflow:hidden;}
+input,
+select,
+textarea {font:normal 20px/1.0 NanumBarunGothic, 나눔바른고딕, Dotum, 돋움, Arial; color:#777; vertical-align:middle;}
+input[type=image],
+input[type=radio],
+input[type=checkbox] {margin:0; padding:0; border:0 !important;}

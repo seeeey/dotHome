@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+/*body { background-color:pink; }  font-size 변경하기 */
+.inner { min-width:320px; }
+header nav,
+header .utill a { display:none; }
+header { height:70px; }
+header .logo img { display:inline-block; width:110px; height:auto; }
+header .logo { top:20px; left:20px; }
+header .utill { top:17px; right:20px; }
+header .utill span { margin:0; }
+/*
+header .utill span button { width:22px; height:22px; line-height:10px; }
+header .utill span button:first-child img { width:13px; height:auto; }
+header .utill span button:last-child img { width:8px; height:auto; }
+*/
+header .utill span button * { vertical-align:bottom; }
+
+.visual .left_txt,
+.visual .right_visu { height:448px; }
+.visual .left_txt { float:none; width:100%; background:url('../images/main/bg_highlight.jpg') center no-repeat; background-size:cover; }
+	.left_txt h1 { color:#fff; }
+	.left_txt .inner_txt { float:none; margin:0px; padding-top:63px; width:100%; text-align:center; } 
+.visual .right_visu { display:none; float:none; }
+

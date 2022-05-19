@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue 공부</title>
+	<link rel="stylesheet" href="./static/css/normalize.css" media="all">
+	<style>
+		ul { list-style-type:none; margin:0; padding:0; }
+		
+		.cal_area { margin:0 auto; width:1200px; }
+		.cal_area table { width:100%; border-collapse:collapse; font-size:13px; }
+		.cal_area table caption { margin:30px 0 10px; padding-bottom:10px; font-size:35px; font-weight:bold;  }
+		.cal_area table thead th { padding:10px; font-size:15px; font-weight:bold; border-top:2px solid #333; }
+		.cal_area table tbody td { border:1px solid #333; border-width:1px 0 1px 1px; }
+			.cal_area table tbody td:first-child { border-left:0px; }
+		.cal_area table tbody td div { position:relative; padding:10px; height:140px;  }
+		.cal_area table tbody td div em { position:absolute; top:10px; left:10px; font-style:normal; }
+			.sat em { color:#004cff; }
+			.sun em { color:#f10000; }
+		.cal_area ul { margin-top:30px; }
+		.cal_area li { margin-top:5px; }
+		.cal_area li a { display:block; padding:5px; font-size:14px; color:#333; background-color:#eee; text-decoration:none; }
+		.cal_area li a:hover { background-color:#ddd; }
+		
+		.pop_area { position:absolute; top:10%; left:10%; width:500px; height:300px; }
+		.pop_area h1 { padding:0 20px; height:40px; line-height:40px; font-size:18px; color:#fff; background-color:#7dadac; }
+		.pop_area .pop_close { position:absolute; top:9px; right:11px; font-size:20px; color:#c8ecec; }
+		.pop_area .pop_con { height:260px; line-height:240px; font-size:30px; color:#95ccca; font-weight:bold; text-align:center; border:1px solid #7dadac; background-color:#fff; }
+		
+		
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="cal_area">
+			<table>
+				<caption>달력</caption>
+				<colgroup>
+					<col style="width:15%" />
+					<col style="width:14%" />
+					<col style="width:14%" />
+					<col style="width:14%" />
+					<col style="width:14%" />
+					<col style="width:14%" />
+					<col style="width:15%" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">일</th>
+						<th scope="col">월</th>
+						<th scope="col">화</th>
+						<th scope="col">수</th>
+						<th scope="col">목</th>
+						<th scope="col">금</th>
+						<th scope="col">토</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="sun">
+							<div></div>
+						</td>
+						<td>
+							<div></div>
+						</td>
+						<td>
+							<div></div>
+						</td>
+						<td>
+							<div></div>
+						</td>
+						<td>
+							<div></div>
+						</td>
+						<td>
+							<div>
+								<em>1</em>
+								<ul>
+									<li><a href="#">일정</a></li>
+									<li><a href="#">일정</a></li>
+								</ul>
+							</div>
+						</td>
+						<td class="sat">
+							<div>
+								<em>2</em>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="sun">
+							<div>
+								<em>3</em>
+							</div>
+						</td>
+						<td>
+							<div>
+								<em>4</em>
+							</div>
+						</td>
+								
+						<td>
+							<div>
+								<em>5</em>
+							</div>
+						</td>
+								
+						<td>
+							<div>
+								<em>6</em>
+							</div>
+						</td>
+								
+						<td>
+							<div>
+								<em>7</em>
+							</div>
+						</td>
+								
+						<td>
+							<div>
+								<em>8</em>
+							</div>
+						</td>
+								
+						<td class="sat">
+							<div>
+								<em>9</em>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Swiper ex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="../../static/js/lib/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/bxslider/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://dev.mirae-n.com/DesignCording/mobile_momteacher/static/css/master.css">
+    <script>
+    	$(function(){
+			// swiper에 따른 모션
+			function insertCount(slide_curr,slide_count){
+			   //console.log('<strong>'+ (slide_curr + 1) +'</strong>/'+ slide_count);
+			   if(slide_curr + 1 == 4) {
+				   	$('.aaaa').css({
+						'transition-duration':'0.5s',
+						'transform':'translate3d(-184.5px, 0px, 0px)'
+				   	});
+				} else if(slide_curr + 1 == 3) {
+					$('.aaaa').css({
+						'transition-duration':'0.5s',
+						'transform':'translate3d(0px, 0px, 0px)'
+					});
+				}
+			};
+			//swiper content
+    		var slider = $('.bxslider').bxSlider({
+				mode: 'horizontal',
+				pagerCustom:'#bx-pager',	//연결
+				infiniteLoop: false,        //마지막페이지 멈춤
+				hideControlOnEnd: true,     //페이징 사라지게하기
+				adaptiveHeight: true,       //height 값 마음대로
+				controls:false,			    //next / prev 버튼 사라지게
+				onSlideAfter: function (){  //슬라이드 처리하자마자
+					var slide_count = slider.getSlideCount();  //총 몇개인지
+					var slide_curr = slider.getCurrentSlide(); // 현재 페이지 몇번인지
+					insertCount(slide_curr,slide_count);
+				}
+		    });
+			
+			//swiper menu
+			$('#bx-pager').bxSlider({
+				infiniteLoop: false,
+				hideControlOnEnd: true,
+				slideWidth: 100,
+				minSlides: 4,
+				maxSlides: 4,
+				slideMargin: 10,
+				controls:false,
+				pager:false
+			});
+			$("#bx-pager a").click(function () {
+				var index = $(this).index();
+			 	$(this).addClass('active').siblings('a').removeClass('active');
+	            //console.log('bla'); 
+	            /*
+				slider.reloadSlider({
+	             	mode: 'fade',
+					speed:0,
+					pagerCustom:'#bx-pager',
+					infiniteLoop: false,
+					hideControlOnEnd: true,
+					adaptiveHeight: true,
+					controls:false,
+					onSlideAfter: function (){
+						 slider.reloadSlider({
+							 mode: 'horizontal',
+							 startSlide:index,
+							 speed:500,
+							pagerCustom:'#bx-pager',
+							infiniteLoop: false,
+							hideControlOnEnd: true,
+							adaptiveHeight: true,
+							controls:false
+						 });
+						var slide_count = slider.getSlideCount();
+						var slide_curr = slider.getCurrentSlide();
+						insertCount(slide_curr,slide_count);
+					}
+	             });
+	             */
+        	});
+
+    	});
+    </script>
+    <style>
+    	.aaaa { overflow:hidden; }
+    	.aaaa a { display:inline-block; height:50px; text-align:center; line-height:50px; background-color:#fff; }
+    	.aaaa a.active { background-color:gold; }
+    	.dddd { clear:both; }
+    	.dddd li { height:200px; line-height:200px; text-align:center; background-color:#fff; }
+    	/*.bx-controls { display:none; }*/
+    </style>
+</head>
+<body id="wrap">
+	<div style="margin:20px 0;">
+	    <div id="bx-pager" class="aaaa">
+		  <a data-slide-index="0" href="">menu1</a>
+		  <a data-slide-index="1" href="">menu2</a>
+		  <a data-slide-index="2" href="">menu3</a>
+		  <a data-slide-index="3" href="">menu4</a>
+		  <a data-slide-index="4" href="">menu5</a>
+		  <a data-slide-index="5" href="">menu6</a>
+		</div>
+	</div>
+    <ul class="bxslider dddd">
+	  <li style="height:100px;">slide1</li>
+	  <li style="height:1500px;">slide2</li>
+	  <li style="height:800px;">slide3</li>
+	  <li style="height:200px;">slide4</li>
+	  <li style="height:400px;">slide5</li>
+	  <li style="height:1200px;">slide6</li>
+	</ul>
+	
+	
+</body>
+</html>

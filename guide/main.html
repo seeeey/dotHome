@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Guide</title>
+	<link rel="stylesheet" href="./static/css/normalize.css" media="all">
+	<link rel="stylesheet" href="./static/css/reset.css" media="all">
+	<link rel="stylesheet" href="./static/css/layout.css" media="all">
+	<script src="./static/js/jquery-1.12.0.min.js"></script>
+	<script>
+		$(function(){
+			
+			// 기본 셋팅
+			$('#main').css('height',$(window).height());
+			$('#main section > a').css('height',$(window).height()*0.7);
+			$('#main article').css('height',$(window).height()*0.3 - 50);
+			
+			//모션
+			$('section > a').mouseover(function(){
+				$(this).children('h1').find('img').stop().animate({
+					left : '50%'
+				});
+				$(this).find('span').stop().animate({
+					bottom : 0
+				}, 300);
+			});
+			$('section > a').mouseleave(function(){
+				$(this).children('h1').find('img').stop().animate({
+					left : '10%'
+				});
+				$(this).find('span').stop().animate({
+					bottom : '-45px'
+				},300);
+			});
+			
+			$('section article ul li a').mouseover(function(){
+				$(this).parents('section').find('h1').find('img').stop().animate({
+					left : '50%'
+				});
+				$(this).parents('section').find('span').stop().stop().animate({
+					bottom : 0
+				}, 300);
+			});
+			$('section article ul li a').mouseleave(function(){
+				$(this).parents('section').find('h1').find('img').stop().animate({
+					left : '10%'
+				});
+				$(this).parents('section').find('span').stop().animate({
+					bottom : '-45px'
+				}, 300);
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<div id="main">
+		<section class="menu01">
+			<a href="./content/guide_h.html">
+				<h1><img src="./static/images/common/main_html.png" alt="html&css" /></h1>
+				<span>HTML &amp; CSS</span>
+			</a>
+			<article>
+				<h1>HTML &amp; CSS<br />가이드</h1>
+				<ul>
+					<li><a href="./content/guide_h.html">html guide</a></li>
+					<li><a href="./content/guide_c.html">css guide</a></li>
+				</ul>
+			</article>
+		</section>
+		<!-- //menu01 -->
+		<section class="menu02">
+			<a href="./content/accessibility.html">
+				<h1><img src="./static/images/common/main_web.png" alt="WEB ACCESSIBILITY" /></h1>
+				<span>WEB ACCESSIBILITY</span>
+			</a>
+			<article>
+				<h1>WEB ACCESSIBILITY<br />웹 접근성</h1>
+				<ul>
+					<li><a href="./content/accessibility.html">접근성의 이해</a></li>
+					<li><a href="./content/accessibility.html">한국형 웹 콘텐츠 접근성 지침</a></li>
+					<li><a href="./content/accessibility.html">웹 접근성 관련 사이트</a></li>
+				</ul>
+			</article>
+		</section>
+		<!-- //menu02 -->
+		<section class="menu03">
+			<a href="./content/sorce.html">
+				<h1><img src="./static/images/common/main_sorce.png" alt="COMPONTET" /></h1>
+				<span>COMPONTET</span>
+			</a>
+			<article>
+				<h1>COMPONENT<br />소스 파일</h1>
+				<ul>
+					<li><a href="./content/sorce.html">h tag</a></li>
+					<li><a href="./content/sorce.html">nav</a></li>
+					<li>
+						.<br />
+						.<br />
+						.
+					</li>
+					<li><a href="./content/sorce.html">footer</a></li>
+				</ul>
+			</article>
+		</section>
+		<!-- //menu03 -->
+		<section class="menu04">
+			<a href="./content/script.html">
+				<h1><img src="./static/images/common/main_script.png" alt="SCRIPT_PLUGIN" /></h1>
+				<span>SCRIPT_PLUGIN</span>
+			</a>
+			<article>
+				<h1>SCRIPT_PLUGIN<br />스크립트</h1>
+				<ul>
+					<li><a href="./content/script.html">html5shiv</a></li>
+					<li><a href="./content/script.html">placeholder</a></li>
+					<li>
+						.<br />
+						.<br />
+						.
+					</li>
+				</ul>
+			</article>
+		</section>
+		<!-- //menu04 -->
+	</div>
+	<!-- //#menu -->
+</body>
+</html>
+

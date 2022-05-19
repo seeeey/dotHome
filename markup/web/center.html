@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>select box</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="../../static/css/normalize.css" media="all">
+	<link rel="stylesheet" href="../../static/css/reset.css" media="all">
+
+	<script src="../../static/js/lib/jquery-1.12.0.min.js"></script>
+
+	<style type="text/css">
+		* {margin:0; padding:0;}
+		html, body {height:100%;}
+		
+		/* ==========================================================================
+		   login & main
+		   ========================================================================== */
+		.login_wrap {width:100%; height:100%; text-align:center; background-color:#eff0f2; }
+		.login_wrap:before {content:""; display:inline-block; height:100%; vertical-align:middle;}
+		.login_wrap:after {content:""; position:absolute; top:0; left:0; width:100%; height:100%;}
+		.login { display:inline-block; position:relative; z-index:2; vertical-align:middle; }
+		.login h1 { margin-bottom:40px; }
+		.login div { overflow:hidden; }
+		.login span { overflow:hidden; display:inline-block; float:left; margin-right:10px; width:324px; }
+		.login input { width:300px; }
+		.login input + input { margin-top:10px; }
+		.login .btn { width:104px; height:74px; line-height:72px; font-size:14px; font-weight:bold; }
+		.login p { margin-top:20px; text-align:left; }
+		.login p .chk_area label { padding-left:26px; }
+		
+		textarea {margin:20px 0; padding:20px 0; width:500px; height:300px; background-color:#eee;}
+
+	</style>
+</head>
+
+<body>
+	<div class="login_wrap">
+		<div class="login">
+			<h1><img src="../static/images/common/login_logo.png" alt="인쇄서비스 관리자" /></h1>
+			<div>
+				<span>
+					<input type="text" class="input" placeholder="관리자 아이디" />
+					<input type="text" class="input" placeholder="비밀번호" />
+				</span>		
+				<a class="btn color" href="#">로그인</a>
+			</div>
+			<p>
+				<span class="chk_area">
+					<input type="checkbox" id="login_chk"><label for="login_chk">아이디 기억하기</label> <!-- id값과 label for 값을 동일 시 해주세요 -->
+				</span>
+			</p>
+			<textarea>
+		
+/* ==========================================================================
+   login &amp; main
+   ========================================================================== */
+  
+.login_wrap {width:100%; height:100%; text-align:center; background-color:#eff0f2; }
+.login_wrap:before {content:""; display:inline-block; height:100%; vertical-align:middle;}
+.login_wrap:after {content:""; position:absolute; top:0; left:0; width:100%; height:100%;}
+.login { display:inline-block; position:relative; z-index:2; margin-top:-100px; vertical-align:middle; }
+.login h1 { margin-bottom:40px; }
+.login div { overflow:hidden; }
+.login span { overflow:hidden; display:inline-block; float:left; margin-right:10px; width:324px; }
+.login input { width:300px; }
+.login input + input { margin-top:10px; }
+.login .btn { width:104px; height:74px; line-height:72px; font-size:14px; font-weight:bold; }
+.login p { margin-top:20px; text-align:left; }
+.login p .chk_area label { padding-left:26px; }
+
+			</textarea>
+		</div>
+	</div>
+
+</body>
+</html>
+
+ 

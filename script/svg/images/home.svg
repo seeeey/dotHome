@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.36 24.5">
+	<defs>
+		<style>
+		.home{fill:none;stroke:#0071ce; stroke-linecap:round; stroke-linejoin:round; stroke-width:2.5px;}
+		.home{
+			stroke-dasharray : 45; /* 선의 길이 */ 
+			stroke-dashoffset : 45; /* 선의 간격 */ 
+			animation : dash 0.5s linear forwards;
+		}
+		@keyframes dash{
+			0% { stroke-dashoffset : 45; }
+			100% { stroke-dashoffset : 0; }
+		}
+		</style>
+	</defs>
+	
+	<g>
+		<g>
+			<path class="home top" d="M21.52,7.8V18.36a4.91,4.91,0,0,1-4.9,4.89H9.77a4.9,4.9,0,0,1-4.89-4.89V7.8"/>
+			<polyline class="home body" points="1.25 10.32 13.18 1.25 25.11 10.32"/>
+		</g>
+	</g>
+</svg>

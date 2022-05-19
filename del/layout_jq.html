@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue 공부</title>
+	<link rel="stylesheet" href="./static/css/normalize.css" media="all">
+	<script src="../static/js/lib/jquery-1.12.0.min.js"></script>
+	<style>
+		#wrap { margin:30px; }
+		
+		.tab_area { overflow:hidden; width:500px; }
+		.tab_area a { float:left; width:calc(100%/3); height:50px; line-height:50px; font-size:15px; color:#333; text-align:center; background-color:#eee; border-left:1px solid #d2cdcd; box-sizing:border-box; }
+		.tab_area a:first-child { border-left:0px; }
+		.tab_area a.select { background-color:#9c9c9c; color:#fff; }
+		.tab_con p { display:none; width:500px; height:150px; line-height:140px; font-size:30px; font-weight:bold; color:#fff; text-align:center; background-color:#9c9c9c; }
+		
+		.pop_area { display:none; position:absolute; top:10%; left:10%; width:500px; height:300px; }
+		.pop_area h1 { padding:0 20px; height:40px; line-height:40px; font-size:18px; color:#fff; background-color:#7dadac; }
+		.pop_area .pop_close { position:absolute; top:9px; right:11px; font-size:20px; color:#c8ecec; }
+		.pop_area .pop_con { height:260px; line-height:240px; font-size:30px; color:#95ccca; font-weight:bold; text-align:center; border:1px solid #7dadac; background-color:#fff; }
+		
+		.faq { margin-top:30px; width:500px; }
+		.faq dt { padding:0 10px; height:40px; line-height:40px; font-size:15px; cursor:pointer; background-color:#ddd; border-top:1px solid #eee; }
+		.faq dt.select + dd { display:block; }
+		.faq dt:before { content:"Q."; display:inline-block; margin-right:5px; font-size:15px; font-weight:bold; color:#9e9898; }
+		.faq dd { display:none; padding:15px 15px 30px 30px; border:1px solid #ddd; box-sizing:border-box; }
+		.faq dd:before { content:"A."; display:inline-block; margin:0 5px 0 -20px; font-size:15px; font-weight:bold; color:#9e9898; }
+		
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="tab_area">
+			<a class="select" href="#con01">탭 1</a>
+			<a href="#con02">탭 2</a>
+			<a href="#con03">탭 3</a>
+		</div>
+		<div class="tab_con">
+			<p id="con01" style="display:block;">탭 1 내용</p>
+			<p id="con02"><a class="layer_pop" href="#pop">팝업</a></p>
+			<p id="con03">탭 3 내용</p>
+		</div>
+		<!-- //tab_area -->
+		<div id="pop" class="pop_area">
+			<h1>팝업</h1>
+			<div class="pop_con">
+				팝업 내용
+			</div>
+			<a class="pop_close" href="#">X</a>
+		</div>
+		<!-- //pop_area -->
+		<div class="faq">
+			<dl>
+				<dt>질문</dt>
+				<dd>답변</dd>
+				<dt>질문</dt>
+				<dd>답변</dd>
+				<dt>질문</dt>
+				<dd>답변</dd>
+				<dt>질문</dt>
+				<dd>답변</dd>
+			</dl>
+		</div>
+		<!-- //faq -->
+		
+		<script>
+			$(function() { 
+				console.log('로드되면서 실행된다.');
+				
+				// *** 탭
+				$('.tab_area a').click(function(){
+					//초기화
+					$('.tab_con p').hide();
+					
+					//tab 액션
+					$(this).addClass('select').siblings('a').removeClass('select');
+					$($(this).attr('href')).show();
+				});
+				
+				// *** 팝업
+				$('.layer_pop').click(function(e){
+					e.preventDefault();
+					$($(this).attr('href')).show();
+					
+					$('.pop_close').click(function(){
+						$(this).parents('.pop_area').hide();
+					});
+				});
+				
+				// *** FAQ
+				$('.faq dt').click(function(e){
+					e.preventDefault();
+					if(!$(this).hasClass('select')){
+						$(this).addClass('select').siblings('dt').removeClass('select');						
+					}else{
+						$(this).removeClass('select');
+					}
+				});
+			});
+		</script>
+		
+	</div>
+</body>
+</html>

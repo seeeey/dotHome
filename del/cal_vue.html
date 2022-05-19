@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue 공부</title>
+	<link rel="stylesheet" href="./static/css/normalize.css" media="all">
+	<script src="../static/js/lib/jquery-1.12.0.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<style>
+		ul { list-style-type:none; margin:0; padding:0; }
+		
+		.wrap { position:relative; }  
+		
+		#cal_area { margin:0 auto; width:800px; }
+		#cal_area.bg:before { content:""; z-index:1; position:absolute; top:0px; left:50%; display:block; margin-left:-400px; width:800px; height:598px; background-color:#eee; opacity:0.8; }
+		#cal_area h1 { margin:30px 0 10px; padding-bottom:10px; font-size:35px; font-weight:bold; text-align:center; }
+		#cal_area table { width:100%; border-collapse:collapse; font-size:13px; }
+		#cal_area table thead th { padding:10px; font-size:15px; font-weight:bold; border-top:2px solid #333; }
+		#cal_area table tbody td { border:1px solid #333; border-width:1px 0 1px 1px; vertical-align:top; }
+			#cal_area table tbody td:first-child { border-left:0px; }
+		#cal_area table tbody td a { position:relative; display:block; width:93px; padding:10px; height:80px; }
+		#cal_area table tbody td a,
+		#cal_area table tbody td a:hover,
+		#cal_area table tbody td a:active { color:#333; }
+		#cal_area table tbody td a em { position:absolute; top:10px; left:10px; font-style:normal; }
+			th.sat,
+			.sat em { color:#004cff; }
+			th.sun,
+			.sun em { color:#f10000; }
+		#cal_area em + p { margin-top:30px; }
+		#cal_area p { margin-top:5px; padding:5px; font-size:14px; color:#333; background-color:#eee; text-decoration:none;}
+		
+		.pop_area { display:none; z-index:2; position:absolute; top:50%; left:50%; margin:-100px 0 0 -200px; width:400px; }
+		.pop_area h1 { padding:0 20px; height:40px; line-height:40px; font-size:18px; color:#fff; background-color:#7dadac; }
+		.pop_area .pop_close { position:absolute; top:9px; right:11px; font-size:20px; color:#c8ecec; }
+		.pop_area .pop_con { padding:10px; height:100px; font-size:30px; color:#95ccca; font-weight:bold; text-align:center; border:1px solid #7dadac; background-color:#fff; }
+		.pop_area .pop_con textarea { width:98%; height:98px; font-size:14px; color:#7dadac; border:0px; outline:none; }
+		
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="cal_area">
+		<!-- 달력이 만들어 집니다. -->
+		</div>
+		
+		<div id="memo" class="pop_area">
+			<h1>메모장</h1>
+			<div class="pop_con">
+				<textarea :value="input" @input="update"></textarea>
+			</div>
+			<a class="pop_close" href="#">X</a>
+		</div>
+		
+		<script>
+			$(function(){
+				/* 현재 날짜와 현재 달에 1일의 날짜 객체를 생성합니다. */
+				var date = new Date(); // 날짜 객체 생성
+				var y = date.getFullYear(); // 현재 연도
+				var m = date.getMonth(); // 현재 월
+				var d = date.getDate(); // 현재 일
+				
+			    // 현재 년(y)월(m)의 1일(1)의 요일을 구합니다.
+				var theDate = new Date(y,m,1);
+			    // 그 날의 요일은?
+				var theDay = theDate.getDay();
+				
+				/* 현재 월의 마지막 일을 구합니다. */
+				    // 1월부터 12월까지의 마지막 일을 배열로 만듭니다.
+				var last = [31,28,31,30,31,30,31,31,30,31,30,31];
+				    // 4년마다 있는 윤년을 계산합니다.(100년||400년 주기는 제외)
+				if (y%4 && y%100!=0 || y%400===0) {
+				    lastDate = last[1] = 29;
+				}
+			    // 현재 월의 마지막 일이 며칠인지 구합니다.
+				var lastDate = last[m];
+				
+				/* 현재 월의 달력에 필요한 행의 개수를 구합니다. */
+			    // theDay(빈 칸의 수), lastDate(월의 전체 일수)
+				var row = Math.ceil((theDay+lastDate)/7);
+				
+				/* 달력 연도/월을 표기하고 달력이 들어갈 테이블을 작성합니다. */
+			    //문자 결합 연산자를 사용해 요일이 나오는 행을 생성합니다.
+				var calendar = "<h1>" + y + "." + (m+1) + "</h1>";
+				calendar += "<table>";
+				calendar += "<thead><tr>";
+				calendar += "<th class='sun'>일</th>";
+				calendar += "<th>월</th>";
+				calendar += "<th>화</th>";
+				calendar += "<th>수</th>";
+				calendar += "<th>목</th>";
+				calendar += "<th>금</th>";
+				calendar += "<th class='sat'>토</th>";
+				calendar += "</tr></thead>";
+				
+			    // 달력에 표기되는 일의 초기값!
+				var dNum = 1;
+				for (var i=1; i<=row; i++) { // 행 만들기
+				    calendar += "<tr>";
+		
+				    for (var k=1; k<=7; k++) { // 열 만들기
+				        // 월1일 이전 + 월마지막일 이후 = 빈 칸으로!
+				        if(i===1 && k<=theDay || dNum>lastDate) {
+				            if(k===1){
+				        		calendar += "<td class='sat'><a></a></td>";
+				       		} else if(k===7){
+				       			calendar += "<td class='sun'><a></a></td>";
+				       		} else {
+				       			calendar += "<td><a></a></td>";	
+				       		}
+				       		
+				        } else {
+				            if(k===1){
+				        		calendar += "<td class='sat'><a class='open_layer' href='#memo'><em>" + dNum + "</em></a></td>";
+				        		dNum++;
+				       		} else if(k===7){
+				       			calendar += "<td class='sun'><a class='open_layer' href='#memo'><em>" + dNum + "</em></a></td>";
+				       			dNum++;
+			       			} else {
+				       			calendar += "<td><a class='open_layer' href='#memo'><em>" + dNum + "</em></a></td>";
+				            	dNum++;
+				       		}
+				       		
+				        }
+				       
+				    }
+				    calendar += "</tr>";
+				}
+			    
+			    // 문서 출력!
+				document.getElementById('cal_area').innerHTML = calendar;
+				
+				// *** 팝업
+				$('.open_layer').click(function(e){
+					e.preventDefault();
+					$('#cal_area').addClass('bg');
+					$($(this).attr('href')).show().find('textarea').focus();
+					$(this).addClass('here');
+					
+					$('.pop_close').click(function(){
+						$('#cal_area').removeClass('bg');
+						$(this).parents('.pop_area').hide();
+						
+						$('.here').append('<p v-html="compiledMarkdown"></p>').removeClass('here');
+						
+						new Vue({
+							el: '#cal_area',
+							data: {
+								input: ''
+							},
+							computed: {
+								compiledMarkdown: function () {
+									return marked(this.input, { sanitize: true });
+								}
+							},
+							methods: {
+								update: _.debounce(function (e) {
+									this.input = e.target.value
+								}, 300);
+							}
+						});
+						
+					});
+				});
+				
+			});
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue 공부</title>
+	<link rel="stylesheet" href="./static/css/normalize.css" media="all">
+	<style>
+		ul { list-style-type:none; margin:0; padding:0; }
+
+		.cal_area { margin:0 auto; width:1200px; }
+		.cal_area legend { margin:30px 0 10px; padding-bottom:10px; font-size:35px; font-weight:bold;  }
+		
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="cal_area">
+			<form>
+				<legend>일기장</legend>
+				<fieldset>
+					<dl>
+						<dt>
+							<ul>
+								<li><input type="text" style="width:100%" placeholder="제목" /></li>
+								<li><input type="text" placeholder="날짜" /></li>
+								<li>
+									<ul>
+										<li><label><input type="radio" name="weather" />맑음</label></li>
+										<li><label><input type="radio" name="weather" />흐림</label></li>
+										<li><label><input type="radio" name="weather" />비</label></li>
+										<li><label><input type="radio" name="weather" />눈</label></li>
+									</ul>
+								</li>
+							</ul>
+						</dt>
+						<dd>
+							<textarea></textarea>
+						</dd>
+						<dd>
+							<ul>
+								<li>
+									<dl>
+										<dt>오늘의 할일</dt>
+										<dd>
+											<textarea></textarea>
+										</dd>
+									</dl>
+								</li>
+								<li>
+									<dl>
+										<dt>내일의 할일</dt>
+										<dd>
+											<textarea></textarea>
+										</dd>
+									</dl>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

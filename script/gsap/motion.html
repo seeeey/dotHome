@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>motion</title>
+    <script src="../../guide/static/js/jquery-1.12.0.min.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+	<style>
+		.box { position:absolute;top:10px;left:10px;width:30px;height:30px;background-color:#a9a9a9; }
+	</style>
+	<script>
+		$(function(){
+			//$("#box").animate( { left:100, width:200 }, 1500 );
+			var box = $('#box');
+			//TweenLite.to( box, 1.5, { width:800, height:70 } );
+			TweenLite.to( box, 1.5, { left:400, top:50 } );
+			//TweenLite.to( box, 1.5, { backgroundColor:"#00f" } );
+			//TweenLite.to( box, 1.5, { scaleX:2, scaleY:3, rotation:120 } );
+			//TweenLite.to( "#box", 1.5, { left:800, ease:Power3.easeInOut } );
+			//TweenLite.to( box, 1.5, { left:800, delay:1 } );
+			// ???? TweenLite.to( box, 1.5, { left:800, onComplete:endFunction } );
+			//TweenLite.fromTo( box, 1.5, { left:10, height:30 }, { left:800, height:100 } );
+			//TweenMax.to( box, 1, { width:300, repeat:3 } ); // 처음 실행 1회 + repeat 3회 실행
+			//TweenMax.to( box, 1, {width:300, repeat:2, repeatDelay:1});
+			//TweenMax.to( box, 1, { width:300, repeat:-1 } );
+			//TweenMax.to( box, 1, {width:300, repeat:-1, yoyo:true});
+			/*
+			var t1 = new TimelineLite()
+				t1.to( box, 1, { width:100 } )
+				t1.to( box, 1, { left:300 } )
+				t1.to( box, 1, { backgroundColor:"#00f" } )
+				t1.to( box, 1, { height:50 } )
+			*/
+			var e0 = ("#e0");
+			var e1 = ("#e1");
+			var e2 = ("#e2");
+			var t2 = new TimelineLite()
+			t2.staggerTo( [e0, e1, e2], 1, {rotation:180}, 0.5 );
+		});
+	</script>
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <div style="position:absolute; top:50px;">
+	    <span class="box" id="e0" style="left:0px"></span>
+	    <span class="box" id="e1" style="left:40px"></span>
+	    <span class="box" id="e2" style="left:80px"></span>
+    </div>
+</body>
+</html>

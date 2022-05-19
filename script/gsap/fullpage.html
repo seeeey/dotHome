@@ -1,0 +1,46 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>motion</title>
+    <script src="../../static/js/jquery-1.12.0.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/ScrollTrigger.min.js"></script>	
+	<script src="../../static/js/lib/jquery.fullPage.js"></script>	
+	<link rel="stylesheet" type="text/css" href="../../static/js/lib/jquery.fullPage.css" />
+	<style>
+		.section { font-size:100px; text-align:center; }
+		.section h1 { margin:0px; vertical-align:middle; }
+	</style>
+	<script>
+		$(function(){
+			
+			$('#fullpage').fullpage({ 
+				sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff']
+			});
+			
+			gsap.registerPlugin(ScrollTrigger);
+			ScrollTrigger.create({
+			  
+			});
+			
+		});
+	</script>
+</head>
+<body>
+
+	<div id="fullpage">
+		<div class="section active" id="section0"><h1>01</h1></div>
+		<div class="section" id="section1">
+		    <div class="slide active"><h1>02-01</h1></div>
+		    <div class="slide"><h1>02-02</h1></div>
+		    <div class="slide"><h1>02-03</h1></div>
+		    <div class="slide"><h1>02-04</h1></div>
+		</div>
+		<div class="section" id="section2"><h1>03</h1></div>
+		<div class="section" id="section3"><h1>04</h1></div>
+	</div>
+</body>
+</html>
